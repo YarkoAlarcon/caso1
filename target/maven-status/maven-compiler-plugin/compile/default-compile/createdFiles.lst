@@ -1,0 +1,12 @@
+main\java\utils\GG_Eventos.class
+main\java\utils\GG_Utils.class
+test\java\previred\CU002_Enfermo_terminal.class
+main\java\utils\GG_ElementFetch.class
+main\java\utils\CC_Parametros.class
+main\java\utils\GG_Validations.class
+main\java\pageObjects\CC_Localizadores_Enfermo_Terminal2.class
+test\java\previred\CC_Test.class
+main\java\utils\GG_SuiteListener.class
+main\java\utils\GG_OpenCSV.class
+resource\java\GG_BaseTest.class
+main\java\pageEvents\Enfermo_terminal.class

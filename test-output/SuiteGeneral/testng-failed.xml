@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [SuiteGeneral]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="TestSmokeGrupo(failed)">
+    <parameter name="browserName" value="chrome"/>
+    <groups>
+      <run>
+        <include name="smoke"/>
+      </run>
+    </groups>
+    <classes>
+      <class name="main.java.pageEvents.CC_PasosFuncionales2">
+        <methods>
+          <include name="iniciarSesionTest"/>
+        </methods>
+      </class> <!-- main.java.pageEvents.CC_PasosFuncionales2 -->
+    </classes>
+  </test> <!-- TestSmokeGrupo(failed) -->
+</suite> <!-- Failed suite [SuiteGeneral] -->
