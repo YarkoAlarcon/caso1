@@ -85,7 +85,6 @@ public class GG_BaseTest {
             Markup m = MarkupHelper.createLabel(logText, ExtentColor.GREEN);
             logger.log(Status.PASS, m);
 
-            // Leer ruta imagen evidencia desde archivo txt
             String archivoPaso = CC_Parametros.gloDir + File.separator + "screenshots" + File.separator + "passed"
                     + File.separator + "Archivo_Paso.txt";
             File archivo = new File(archivoPaso);
@@ -107,7 +106,6 @@ public class GG_BaseTest {
             logger.log(Status.SKIP, m);
         }
 
-        // Cerrar navegador después de cada test
         if (driver != null) {
             driver.quit();
         }
@@ -120,11 +118,12 @@ public class GG_BaseTest {
 
     private void initializeDriver(String browserName) {
         if (browserName.equalsIgnoreCase("chrome")) {
-            WebDriverManager.chromedriver().setup();
+            // ✅ Fuerza ChromeDriver compatible con versión 139 de Chrome
+            WebDriverManager.chromedriver().browserVersion("139").setup();
+            // Si prefieres detección automática, reemplaza por:
+            // WebDriverManager.chromedriver().setup();
 
             ChromeOptions options = new ChromeOptions();
-
-            // Opciones para ejecución headless o modo incognito
             options.addArguments("--headless", "--disable-gpu", "--window-size=1920,1200",
                     "--ignore-certificate-errors", "--disable-extensions", "--no-sandbox", "--disable-dev-shm-usage",
                     "--incognito", "--disable-blink-features=AutomationControlled");
@@ -133,17 +132,19 @@ public class GG_BaseTest {
             options.setExperimentalOption("useAutomationExtension", false);
             options.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
 
-            if ("S".equals(CC_Test.gloVerFlujo)) { // Ver flujo en navegador
+            if ("S".equals(CC_Test.gloVerFlujo)) {
                 driver = new ChromeDriver();
             } else {
                 driver = new ChromeDriver(options);
             }
+
         } else if (browserName.equalsIgnoreCase("edge")) {
             WebDriverManager.edgedriver().setup();
             driver = new EdgeDriver();
+
         } else {
-            // Por defecto Chrome normal
-            WebDriverManager.chromedriver().setup();
+            // Por defecto: Chrome
+            WebDriverManager.chromedriver().browserVersion("139").setup();
             driver = new ChromeDriver();
         }
     }
