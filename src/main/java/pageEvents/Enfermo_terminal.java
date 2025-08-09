@@ -340,6 +340,7 @@ public class Enfermo_terminal extends CC_Test {
 			wait.until(ExpectedConditions.elementToBeClickable(btncontinuar1));
 			GG_Eventos.clickButton(btncontinuar1);
 
+			Thread.sleep(3000);
 			// 2. Antecedentes Laborales y Previsionales
 			// Situación laboral
 			WebElement situlaboral = wait.until(ExpectedConditions
