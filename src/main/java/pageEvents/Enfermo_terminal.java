@@ -174,7 +174,7 @@ public class Enfermo_terminal extends CC_Test {
 	            Thread.sleep(2000);
 
 	            // Ruta del directorio desde CC_Parametros
-	            String rutaCarpeta = new File(CC_Parametros.gloDir).getAbsolutePath();
+	            String rutaCarpeta = new File("caso1//", CC_Parametros.gloDir).getAbsolutePath();
 	            // Nombre del archivo que quieres cargar
 	            String nombreArchivo = "Documento.pdf";
 
