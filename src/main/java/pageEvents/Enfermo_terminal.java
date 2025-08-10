@@ -173,7 +173,7 @@ public class Enfermo_terminal extends CC_Test {
 			    Thread.sleep(2000);
 
 			    // Ruta relativa al archivo dentro del proyecto
-			    String nombreArchivo = new File("//caso1//Documento.pdf").getAbsolutePath(); // o ajusta la ruta si está en otra carpeta
+			    String nombreArchivo = new File("/Documento.pdf").getAbsolutePath(); // o ajusta la ruta si está en otra carpeta
 
 			    // Copiar al portapapeles
 			    StringSelection seleccion = new StringSelection(nombreArchivo);
