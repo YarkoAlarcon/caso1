@@ -169,7 +169,7 @@ public class Enfermo_terminal extends CC_Test {
 			WebElement fileInput = driver.findElement(By.xpath("//input[@type='file']"));
 
 			// Usa la ruta relativa desde el workspace de Jenkins
-			String rutaArchivo = new File("CU002_Enfermo_terminal/Documento.pdf").getAbsolutePath();
+			String rutaArchivo = new File("//Documento.pdf").getAbsolutePath();
 			
 			fileInput.sendKeys(rutaArchivo);
 				
