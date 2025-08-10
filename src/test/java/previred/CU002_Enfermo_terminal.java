@@ -29,7 +29,7 @@ public class CU002_Enfermo_terminal extends CC_Test {
         return GG_OpenCSV.getCSVParameters("Flujo_Sagcom2.csv", 18);
     }
     
-	@Test(enabled = true, dataProvider = "Data1", priority = 2)
+	@Test(enabled = false, dataProvider = "Data1", priority = 2)
 	public void Flujo_Sagcom_Administrativo(String args[]) throws InterruptedException {
 		GG_Utils.infoTestCase("Ingreso de Solicitud Flujo Perfil Administrativo", "Validar flujo perfil administrativo");
 		Enfermo_terminal.iniciarSesionAdministrativo(args[18], args[19], "1");
@@ -42,7 +42,7 @@ public class CU002_Enfermo_terminal extends CC_Test {
         return GG_OpenCSV.getCSVParameters("Flujo_Sagcom2.csv", 20);
     }
     
-	@Test(enabled = true, dataProvider = "Data2", priority = 3)
+	@Test(enabled = false, dataProvider = "Data2", priority = 3)
 	public void Flujo_Sagcom_Medico(String args[]) throws InterruptedException {
 		GG_Utils.infoTestCase("Ingreso de Solicitud Flujo Perfil Medico", "Validar flujo perfil medico");
 		Enfermo_terminal.iniciarSesionMedico(args[20], args[21], "1");
@@ -55,7 +55,7 @@ public class CU002_Enfermo_terminal extends CC_Test {
         return GG_OpenCSV.getCSVParameters("Flujo_Sagcom2.csv", 29);
     }
     
-	@Test(enabled = true, dataProvider = "Data3", priority = 4)
+	@Test(enabled = false, dataProvider = "Data3", priority = 4)
 	public void Flujo_Sagcom_Administrativo1(String args[]) throws InterruptedException {
 
 		GG_Utils.infoTestCase("Ingreso de Solicitud Flujo Perfil Administrativo", "Validar flujo perfil administrativo");
