@@ -166,13 +166,37 @@ public class Enfermo_terminal extends CC_Test {
 			GG_Eventos.clickButton(buttonArchivoSesionElement);
 			Thread.sleep(3000);
 
-			WebElement fileInput = driver.findElement(By.xpath("//input[@type='file']"));
+			try {
+			    Robot robot = new Robot();
 
-			// Usa la ruta relativa desde el workspace de Jenkins
-			String rutaArchivo = new File("//Documento.pdf").getAbsolutePath();
-			
-			fileInput.sendKeys(rutaArchivo);
-				
+			    // Esperar a que se abra el cuadro de diálogo
+			    Thread.sleep(2000);
+
+			    // Ruta relativa al archivo dentro del proyecto
+			    String nombreArchivo = new File("//Documento.pdf").getAbsolutePath(); // o ajusta la ruta si está en otra carpeta
+
+			    // Copiar al portapapeles
+			    StringSelection seleccion = new StringSelection(nombreArchivo);
+			    Toolkit.getDefaultToolkit().getSystemClipboard().setContents(seleccion, null);
+
+			    // Ctrl + V
+			    robot.keyPress(KeyEvent.VK_CONTROL);
+			    robot.keyPress(KeyEvent.VK_V);
+			    Thread.sleep(200);
+			    robot.keyRelease(KeyEvent.VK_V);
+			    robot.keyRelease(KeyEvent.VK_CONTROL);
+
+			    Thread.sleep(500);
+
+			    // Presionar Enter
+			    robot.keyPress(KeyEvent.VK_ENTER);
+			    robot.keyRelease(KeyEvent.VK_ENTER);
+
+			    System.out.println("Archivo cargado automáticamente: " + nombreArchivo);
+
+			} catch (AWTException | InterruptedException e) {
+			    e.printStackTrace();
+			}
 						Thread.sleep(5000);	
 
 			// Se ingresa Fecha de recepción de solicitud en AFP
