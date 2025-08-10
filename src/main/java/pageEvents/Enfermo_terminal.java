@@ -168,55 +168,69 @@ public class Enfermo_terminal extends CC_Test {
 			Thread.sleep(3000);
 
 			try {
-	            Robot robot = new Robot();
+			    Robot robot = new Robot();
 
-	            // Esperar a que se abra el cuadro de diálogo
-	            Thread.sleep(2000);
+			    // 1️⃣ Esperar a que aparezca el diálogo de archivos
+			    Thread.sleep(2000);
 
-	            // Ruta del directorio desde CC_Parametros
-				String rutaCarpeta = new File("caso1//",CC_Parametros.gloDir).getAbsolutePath();
-	            // Nombre del archivo que quieres cargar
-	            String nombreArchivo = "Documento.pdf";
+			    // 2️⃣ Ruta de la carpeta (desde CC_Parametros)
+			    String rutaCarpeta = new File(CC_Parametros.gloDir).getAbsolutePath();
 
-	            // --- 1. Escribir la ruta de la carpeta ---
-	            StringSelection seleccionRuta = new StringSelection(rutaCarpeta);
-	            Toolkit.getDefaultToolkit().getSystemClipboard().setContents(seleccionRuta, null);
+			    // Copiar ruta al portapapeles
+			    StringSelection seleccionRuta = new StringSelection(rutaCarpeta);
+			    Toolkit.getDefaultToolkit().getSystemClipboard().setContents(seleccionRuta, null);
 
-	            robot.keyPress(KeyEvent.VK_CONTROL);
-	            robot.keyPress(KeyEvent.VK_V);
-	            Thread.sleep(200);
-	            robot.keyRelease(KeyEvent.VK_V);
-	            robot.keyRelease(KeyEvent.VK_CONTROL);
+			    // 3️⃣ Ctrl + L para seleccionar barra de dirección
+			    robot.keyPress(KeyEvent.VK_CONTROL);
+			    robot.keyPress(KeyEvent.VK_L);
+			    robot.keyRelease(KeyEvent.VK_L);
+			    robot.keyRelease(KeyEvent.VK_CONTROL);
+			    Thread.sleep(300);
 
-	            Thread.sleep(500);
+			    // 4️⃣ Ctrl + V para pegar la ruta
+			    robot.keyPress(KeyEvent.VK_CONTROL);
+			    robot.keyPress(KeyEvent.VK_V);
+			    robot.keyRelease(KeyEvent.VK_V);
+			    robot.keyRelease(KeyEvent.VK_CONTROL);
+			    Thread.sleep(300);
 
-	            // Presionar Enter para ir a la carpeta
-	            robot.keyPress(KeyEvent.VK_ENTER);
-	            robot.keyRelease(KeyEvent.VK_ENTER);
+			    // 5️⃣ Enter para ir a la carpeta
+			    robot.keyPress(KeyEvent.VK_ENTER);
+			    robot.keyRelease(KeyEvent.VK_ENTER);
+			    System.out.println("Ruta abierta: " + rutaCarpeta);
 
-	            Thread.sleep(1000);
+			    // 6️⃣ Esperar carga de carpeta
+			    Thread.sleep(1500);
 
-	            // --- 2. Escribir el nombre del archivo ---
-	            StringSelection seleccionArchivo = new StringSelection(nombreArchivo);
-	            Toolkit.getDefaultToolkit().getSystemClipboard().setContents(seleccionArchivo, null);
+			    // 7️⃣ Nombre del archivo
+			    String nombreArchivo = "Documento.pdf";
+			    StringSelection seleccionArchivo = new StringSelection(nombreArchivo);
+			    Toolkit.getDefaultToolkit().getSystemClipboard().setContents(seleccionArchivo, null);
 
-	            robot.keyPress(KeyEvent.VK_CONTROL);
-	            robot.keyPress(KeyEvent.VK_V);
-	            Thread.sleep(200);
-	            robot.keyRelease(KeyEvent.VK_V);
-	            robot.keyRelease(KeyEvent.VK_CONTROL);
+			    // 8️⃣ Mover el foco al campo "Nombre de archivo"
+			    // Si el foco está en la lista de archivos, bastan 2 TABs
+			    for (int i = 0; i < 7; i++) {
+			        robot.keyPress(KeyEvent.VK_TAB);
+			        robot.keyRelease(KeyEvent.VK_TAB);
+			        Thread.sleep(200);
+			    }
 
-	            Thread.sleep(500);
+			    // 9️⃣ Pegar el nombre del archivo
+			    robot.keyPress(KeyEvent.VK_CONTROL);
+			    robot.keyPress(KeyEvent.VK_V);
+			    robot.keyRelease(KeyEvent.VK_V);
+			    robot.keyRelease(KeyEvent.VK_CONTROL);
+			    Thread.sleep(300);
 
-	            // Presionar Enter para abrir el archivo
-	            robot.keyPress(KeyEvent.VK_ENTER);
-	            robot.keyRelease(KeyEvent.VK_ENTER);
+			    // 🔟 Enter para abrir el archivo
+			    robot.keyPress(KeyEvent.VK_ENTER);
+			    robot.keyRelease(KeyEvent.VK_ENTER);
 
-	            System.out.println("Archivo cargado automáticamente: " + rutaCarpeta + File.separator + nombreArchivo);
+			    System.out.println("Archivo cargado: " + nombreArchivo);
 
-	        } catch (AWTException | InterruptedException e) {
-	            e.printStackTrace();
-	        }
+			} catch (AWTException | InterruptedException e) {
+			    e.printStackTrace();
+			}
 						Thread.sleep(5000);	
 
 			// Se ingresa Fecha de recepción de solicitud en AFP
