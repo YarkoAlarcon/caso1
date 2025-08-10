@@ -165,39 +165,12 @@ public class Enfermo_terminal extends CC_Test {
 			wait.until(ExpectedConditions.elementToBeClickable(buttonArchivoSesionElement));
 			GG_Eventos.clickButton(buttonArchivoSesionElement);
 			Thread.sleep(3000);
-			
-			try {
-			    Robot robot = new Robot();
 
-			    // Espera breve para asegurar que se abra el diálogo de archivos
-			    Thread.sleep(2000);
-
-			    // Nombre del archivo a cargar (puede ser solo el nombre si ya estás en el directorio correcto)
-			    String nombreArchivo = "Documento.pdf";  // o la ruta completa
-
-			    // Copiar al portapapeles
-			    StringSelection seleccion = new StringSelection(nombreArchivo);
-			    Toolkit.getDefaultToolkit().getSystemClipboard().setContents(seleccion, null);
-
-			    // Ctrl + V
-			    robot.keyPress(KeyEvent.VK_CONTROL);
-			    robot.keyPress(KeyEvent.VK_V);
-			    Thread.sleep(200);
-			    robot.keyRelease(KeyEvent.VK_V);
-			    robot.keyRelease(KeyEvent.VK_CONTROL);
-
-			    Thread.sleep(500);
-
-			    // Presionar Enter
-			    robot.keyPress(KeyEvent.VK_ENTER);
-			    robot.keyRelease(KeyEvent.VK_ENTER);
-
-			    System.out.println("Archivo cargado automáticamente: " + nombreArchivo);
-
-			} catch (AWTException | InterruptedException e) {
-			    e.printStackTrace();
-			}
-			
+			WebElement labelArchivo = wait.until(
+			    ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'Documento.pdf')]"))
+			);
+			Reporte.registrarPaso("Archivo visible en la UI: " + labelArchivo.getText(), true);
+	
 			Thread.sleep(5000);	
 
 			// Se ingresa Fecha de recepción de solicitud en AFP
