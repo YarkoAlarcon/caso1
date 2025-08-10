@@ -18,6 +18,7 @@ import main.java.utils.GG_Eventos;
 import main.java.utils.GG_Utils;
 import main.java.utils.GG_Validations;
 import test.java.previred.CC_Test;
+import main.java.utils.CC_Parametros;
 import java.io.File; // Importa la clase File para manejar rutas de archivo
 import java.awt.AWTException;
 import java.awt.Robot;
