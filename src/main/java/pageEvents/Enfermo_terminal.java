@@ -161,10 +161,81 @@ public class Enfermo_terminal extends CC_Test {
 			GG_Eventos.clickButton(buttonenfermoterminal);
 			Thread.sleep(300);
 
+			WebElement buttonArchivoSesionElement = elementFetch.getWebElement("XPATH",
+					CC_Localizadores_Enfermo_Terminal2.buttonArchivo);
+			wait.until(ExpectedConditions.elementToBeClickable(buttonArchivoSesionElement));
+			GG_Eventos.clickButton(buttonArchivoSesionElement);
+			Thread.sleep(3000);
 			
+			try {
+			    Robot robot = new Robot();
 
-			GG_Eventos.adjuntarArchivoOculto(driver, CC_Localizadores_Enfermo_Terminal2.buttonArchivo, "caso1\\CC_Logs_2p\\Documento.pdf");
-						Thread.sleep(5000);	
+			    // 1️⃣ Esperar a que aparezca el diálogo de archivos
+			    Thread.sleep(2000);
+
+			    // 2️⃣ Ruta de la carpeta (desde CC_Parametros)
+			    String rutaCarpeta = new File(CC_Parametros.gloDir).getAbsolutePath();
+
+			    // Copiar ruta al portapapeles
+			    StringSelection seleccionRuta = new StringSelection(rutaCarpeta);
+			    Toolkit.getDefaultToolkit().getSystemClipboard().setContents(seleccionRuta, null);
+
+			    // 3️⃣ Ctrl + L para seleccionar barra de dirección
+			    robot.keyPress(KeyEvent.VK_CONTROL);
+			    robot.keyPress(KeyEvent.VK_L);
+			    robot.keyRelease(KeyEvent.VK_L);
+			    robot.keyRelease(KeyEvent.VK_CONTROL);
+			    Thread.sleep(300);
+
+			    // 4️⃣ Ctrl + V para pegar la ruta
+			    robot.keyPress(KeyEvent.VK_CONTROL);
+			    robot.keyPress(KeyEvent.VK_V);
+			    robot.keyRelease(KeyEvent.VK_V);
+			    robot.keyRelease(KeyEvent.VK_CONTROL);
+			    Thread.sleep(300);
+
+			    // 5️⃣ Enter para ir a la carpeta
+			    robot.keyPress(KeyEvent.VK_ENTER);
+			    robot.keyRelease(KeyEvent.VK_ENTER);
+			    System.out.println("Ruta abierta: " + rutaCarpeta);
+
+			    // 6️⃣ Esperar carga de carpeta
+			    Thread.sleep(1500);
+
+			    // 7️⃣ Nombre del archivo
+			    String nombreArchivo = "Documento.pdf";
+			    StringSelection seleccionArchivo = new StringSelection(nombreArchivo);
+			    Toolkit.getDefaultToolkit().getSystemClipboard().setContents(seleccionArchivo, null);
+
+			    // 8️⃣ Mover el foco al campo "Nombre de archivo"
+			    // Si el foco está en la lista de archivos, bastan 2 TABs
+			    for (int i = 0; i < 7; i++) {
+			        robot.keyPress(KeyEvent.VK_TAB);
+			        robot.keyRelease(KeyEvent.VK_TAB);
+			        Thread.sleep(200);
+			    }
+
+			    // 9️⃣ Pegar el nombre del archivo
+			    robot.keyPress(KeyEvent.VK_CONTROL);
+			    robot.keyPress(KeyEvent.VK_V);
+			    robot.keyRelease(KeyEvent.VK_V);
+			    robot.keyRelease(KeyEvent.VK_CONTROL);
+			    Thread.sleep(300);
+
+			    // 🔟 Enter para abrir el archivo
+			    robot.keyPress(KeyEvent.VK_ENTER);
+			    robot.keyRelease(KeyEvent.VK_ENTER);
+
+			    System.out.println("Archivo cargado: " + nombreArchivo);
+
+			} catch (AWTException | InterruptedException e) {
+			    e.printStackTrace();
+			}
+
+
+
+			
+			Thread.sleep(5000);	
 
 			// Se ingresa Fecha de recepción de solicitud en AFP
 			WebElement fecharecepElement = elementFetch.getWebElement("XPATH",
@@ -306,7 +377,6 @@ public class Enfermo_terminal extends CC_Test {
 			wait.until(ExpectedConditions.elementToBeClickable(btncontinuar1));
 			GG_Eventos.clickButton(btncontinuar1);
 
-			Thread.sleep(3000);
 			// 2. Antecedentes Laborales y Previsionales
 			// Situación laboral
 			WebElement situlaboral = wait.until(ExpectedConditions
