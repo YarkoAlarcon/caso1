@@ -118,34 +118,44 @@ public class GG_BaseTest {
 
     private void initializeDriver(String browserName) {
         if (browserName.equalsIgnoreCase("chrome")) {
-            // ✅ Fuerza ChromeDriver compatible con versión 139 de Chrome
             WebDriverManager.chromedriver().browserVersion("139").setup();
-            // Si prefieres detección automática, reemplaza por:
-            // WebDriverManager.chromedriver().setup();
 
             ChromeOptions options = new ChromeOptions();
-            options.addArguments("--headless", "--disable-gpu", "--window-size=1920,1200",
-                    "--ignore-certificate-errors", "--disable-extensions", "--no-sandbox", "--disable-dev-shm-usage",
-                    "--incognito", "--disable-blink-features=AutomationControlled");
+
+            if ("S".equals(CC_Test.gloVerFlujo)) {
+                // Modo visible para local (sin headless)
+                options.addArguments("--start-maximized");
+                // puedes agregar más opciones para modo visible si quieres
+            } else {
+                // Modo headless para Jenkins o ambientes sin GUI
+                options.addArguments("--headless=new");
+                options.addArguments("--window-size=1920,1080");
+                options.addArguments("--disable-gpu");
+            }
+
+            // Opciones comunes para ambos modos
+            options.addArguments("--ignore-certificate-errors");
+            options.addArguments("--disable-extensions");
+            options.addArguments("--no-sandbox");
+            options.addArguments("--disable-dev-shm-usage");
+            options.addArguments("--incognito");
+            options.addArguments("--disable-blink-features=AutomationControlled");
 
             options.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
             options.setExperimentalOption("useAutomationExtension", false);
             options.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
 
-            if ("S".equals(CC_Test.gloVerFlujo)) {
-                driver = new ChromeDriver();
-            } else {
-                driver = new ChromeDriver(options);
-            }
+            driver = new ChromeDriver(options);
 
         } else if (browserName.equalsIgnoreCase("edge")) {
             WebDriverManager.edgedriver().setup();
             driver = new EdgeDriver();
 
         } else {
-            // Por defecto: Chrome
+            // Por defecto: Chrome sin opciones específicas
             WebDriverManager.chromedriver().browserVersion("139").setup();
             driver = new ChromeDriver();
         }
     }
 }
+
