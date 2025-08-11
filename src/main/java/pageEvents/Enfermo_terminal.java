@@ -174,7 +174,7 @@ public class Enfermo_terminal extends CC_Test {
 			    Thread.sleep(2000);
 
 			    // 2️⃣ Ruta de la carpeta (desde CC_Parametros)
-			    String rutaCarpeta = new File("//CC_Logs_2p//").getAbsolutePath();
+			    String rutaCarpeta = new File("CC_Logs_2p//").getAbsolutePath();
 
 			    // Copiar ruta al portapapeles
 			    StringSelection seleccionRuta = new StringSelection(rutaCarpeta);
